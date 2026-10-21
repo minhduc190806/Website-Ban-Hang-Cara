@@ -1,0 +1,108 @@
+@model IEnumerable<MinhDucWeb.Models.Product>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Quản Lý Sản Phẩm (CRUD)";
+    var categories = ViewBag.Categories as List<MinhDucWeb.Models.Category>;
+    int? currentCatId = ViewBag.CurrentCategoryId as int?;
+    string? currentSearch = ViewBag.CurrentSearch as string;
+}
+
+<div class="admin-header-bar">
+    <div>
+        <h1>Quản Lý Sản Phẩm (CRUD)</h1>
+        <p style="color: #666; margin-top: 5px;">Thêm mới, sửa thông tin, xóa sản phẩm kết nối cơ sở dữ liệu</p>
+    </div>
+    <a asp-area="Admin" asp-controller="Products" asp-action="Create" class="btn-sm btn-add">
+        <i class="fa-solid fa-plus"></i> Thêm Sản Phẩm Mới
+    </a>
+</div>
+
+<!-- Search & Filter -->
+<div class="admin-card" style="padding: 18px 25px; margin-bottom: 20px;">
+    <form method="get" asp-area="Admin" asp-controller="Products" asp-action="Index" style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+        <input type="text" name="search" value="@currentSearch" placeholder="Tìm kiếm theo tên sản phẩm, thương hiệu..." 
+               style="padding: 10px 15px; border: 1px solid #ddd; border-radius: 5px; flex: 1; outline: none; min-width: 250px;">
+        
+        <select name="categoryId" style="padding: 10px 15px; border: 1px solid #ddd; border-radius: 5px; outline: none; background: #fff;">
+            <option value="">-- Tất cả danh mục --</option>
+            @if (categories != null)
+            {
+                foreach (var cat in categories)
+                {
+                    if (currentCatId == cat.Id)
+                    {
+                        <option value="@cat.Id" selected>@cat.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@cat.Id">@cat.Name</option>
+                    }
+                }
+            }
+        </select>
+
+        <button type="submit" class="btn-sm btn-secondary">
+            <i class="fa fa-filter"></i> Lọc Dữ Liệu
+        </button>
+
+        @if (!string.IsNullOrEmpty(currentSearch) || currentCatId.HasValue)
+        {
+            <a asp-area="Admin" asp-controller="Products" asp-action="Index" style="color: #e74c3c; font-weight: 600; text-decoration: underline;">
+                Xóa bộ lọc
+            </a>
+        }
+    </form>
+</div>
+
+<!-- Products Table -->
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h2>Danh Sách Sản Phẩm (@Model.Count())</h2>
+    </div>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th style="width: 50px;">ID</th>
+                <th style="width: 70px;">Hình Ảnh</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Danh Mục</th>
+                <th>Thương Hiệu</th>
+                <th>Giá Bán</th>
+                <th>Tồn Kho</th>
+                <th style="width: 200px; text-align: center;">Hành Động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><strong>#@item.Id</strong></td>
+                    <td><img src="~/@item.ImageUrl" alt="@item.Name"></td>
+                    <td>
+                        <strong>@item.Name</strong>
+                        @if (item.IsFeatured)
+                        {
+                            <span class="admin-badge badge-warning" style="margin-left: 5px;">Hot</span>
+                        }
+                    </td>
+                    <td><span class="admin-badge badge-info">@(item.Category?.Name ?? "Chưa phân loại")</span></td>
+                    <td>@item.Brand</td>
+                    <td><strong style="color: #e94747;">$@item.Price.ToString("N2")</strong></td>
+                    <td><span class="admin-badge badge-success">@item.Stock cái</span></td>
+                    <td style="text-align: center;">
+                        <a asp-area="" asp-controller="Shop" asp-action="Detail" asp-route-id="@item.Id" target="_blank" class="btn-sm btn-view" title="Xem trên web">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a asp-area="Admin" asp-controller="Products" asp-action="Edit" asp-route-id="@item.Id" class="btn-sm btn-edit" title="Sửa">
+                            <i class="fa fa-pen"></i> Sửa
+                        </a>
+                        <a asp-area="Admin" asp-controller="Products" asp-action="Delete" asp-route-id="@item.Id" class="btn-sm btn-delete" title="Xóa">
+                            <i class="fa fa-trash"></i> Xóa
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

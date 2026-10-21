@@ -1,0 +1,35 @@
+@{
+    ViewData["Title"] = "Liên Hệ Với Chúng Tôi";
+}
+
+<!-- Contact Hero -->
+<section id="contact-hero" style="background-image: url('/img/about/banner.png'); padding: 60px 20px; text-align: center; color: #fff;">
+    <h1 style="font-size: 38px; margin-bottom: 10px;">#Liên Hệ Với Chúng Tôi</h1>
+    <p style="font-size: 16px;">Chúng tôi luôn sẵn sàng hỗ trợ và lắng nghe ý kiến đóng góp của bạn</p>
+</section>
+
+<!-- Contact Details -->
+<section id="contact-details" class="section-p1">
+    <div class="contact-container" style="display: flex; gap: 50px; padding: 40px 0;">
+        <!-- Thông tin liên hệ -->
+        <div class="contact-info" style="flex: 1; line-height: 32px; font-size: 16px;">
+            <h2 style="margin-bottom: 20px; font-size: 26px;">Thông Tin Cửa Hàng</h2>
+            <p><i class="fa fa-map-marker-alt" style="color: #e94747; width: 25px;"></i> Hà Nội, Việt Nam</p>
+            <p><i class="fa fa-phone" style="color: #e94747; width: 25px;"></i> 0123 456 789 / 0912345678</p>
+            <p><i class="fa fa-envelope" style="color: #e94747; width: 25px;"></i> minhduc@gmail.com</p>
+            <p><i class="fa fa-clock" style="color: #e94747; width: 25px;"></i> Thứ 2 - Thứ 7: 8:00 - 22:00</p>
+        </div>
+
+        <!-- Form liên hệ -->
+        <div class="contact-form" style="flex: 1;">
+            <h2 style="margin-bottom: 20px; font-size: 26px;">Gửi Tin Nhắn Cho Chúng Tôi</h2>
+            <form onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã gửi tin nhắn! Chúng tôi sẽ phản hồi sớm nhất.'); this.reset();">
+                <input type="text" placeholder="Họ và tên của bạn" required>
+                <input type="email" placeholder="Địa chỉ email" required>
+                <input type="text" placeholder="Tiêu đề câu hỏi">
+                <textarea rows="5" placeholder="Nội dung cần hỗ trợ..."></textarea>
+                <button type="submit" class="normal">Gửi Tin Nhắn</button>
+            </form>
+        </div>
+    </div>
+</section>

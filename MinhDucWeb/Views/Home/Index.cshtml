@@ -1,0 +1,136 @@
+@{
+    ViewData["Title"] = "Trang Chủ";
+    var featured = ViewBag.FeaturedProducts as List<MinhDucWeb.Models.Product>;
+    var newArrivals = ViewBag.NewArrivals as List<MinhDucWeb.Models.Product>;
+}
+
+<!-- Hero Section -->
+<section id="hero">
+    <h4>Ưu đãi siêu giá trị</h4>
+    <h2>Trên tất cả sản phẩm</h2>
+    <h1>Phiếu giảm giá 50% sản phẩm</h1>
+    <a asp-controller="Shop" asp-action="Index" class="normal" style="text-decoration: none; display: inline-block;">Mua ngay</a>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="tinhnang">
+    <div class="box">
+        <img src="~/img/features/f1.png" alt="Free Shipping">
+        <h5>Miễn phí vận chuyển</h5>
+    </div>
+    <div class="box">
+        <img src="~/img/features/f2.png" alt="Online Order">
+        <h5>Đặt hàng online</h5>
+    </div> 
+    <div class="box">
+        <img src="~/img/features/f3.png" alt="Save Money">
+        <h5>Tiết kiệm chi phí</h5>
+    </div>
+    <div class="box">
+        <img src="~/img/features/f4.png" alt="Promotions">
+        <h5>Khuyến mãi</h5>
+    </div> 
+    <div class="box">
+        <img src="~/img/features/f5.png" alt="Easy Return">
+        <h5>Đổi trả sản phẩm</h5>
+    </div> 
+    <div class="box">
+        <img src="~/img/features/f6.png" alt="Support">
+        <h5>Hỗ trợ 24/7</h5>
+    </div>  
+</section>
+
+<!-- Featured Products (Lấy trực tiếp từ CSDL SQL Server) -->
+<section id="product1" class="sanpham">
+    <h1>Sản Phẩm Nổi Bật</h1>
+    <p>Bộ Sưu Tập Thời Trang Mùa Hè 2026</p>
+    <div id="product-container">
+        @if (featured != null && featured.Any())
+        {
+            @foreach (var item in featured)
+            {
+                <div class="pro" onclick="window.location.href='@Url.Action("Detail", "Shop", new { id = item.Id })'" style="cursor: pointer;">
+                    <img src="~/@item.ImageUrl" alt="@item.Name">
+                    <div class="mota">
+                        <span>@item.Brand</span>
+                        <h5>@item.Name</h5>
+                        <div class="star">
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                        </div>
+                        <h4>$@item.Price.ToString("N2")</h4>
+                    </div>
+                    <div>
+                        <form asp-controller="Cart" asp-action="AddToCart" method="post" style="display:inline;" onclick="event.stopPropagation();">
+                            <input type="hidden" name="productId" value="@item.Id" />
+                            <input type="hidden" name="quantity" value="1" />
+                            <input type="hidden" name="size" value="L" />
+                            <button type="submit" style="background: none; border: none; cursor: pointer;">
+                                <i class="fa-solid fa-cart-plus cart"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</section>
+
+<!-- Banner Khuyến Mãi -->
+<section id="banner" class="section-m1" style="background-image: url('img/banner/b2.jpg'); text-align: center; padding: 40px; color: #fff;">
+    <h4>Dịch vụ sửa chữa & phục hồi</h4>
+    <h2>Giảm giá lên đến <span>70%</span> - Cho toàn bộ áo thun & phụ kiện</h2>
+    <a asp-controller="Shop" asp-action="Index" class="normal" style="text-decoration: none; display: inline-block;">Khám phá thêm</a>
+</section>
+
+<!-- New Arrivals (Lấy từ CSDL SQL Server) -->
+<section id="product1" class="sanpham">
+    <h1>Hàng Mới Về</h1>
+    <p>Thiết Kế Xu Hướng Hiện Đại Mới Nhất</p>
+    <div id="product-container">
+        @if (newArrivals != null && newArrivals.Any())
+        {
+            @foreach (var item in newArrivals)
+            {
+                <div class="pro" onclick="window.location.href='@Url.Action("Detail", "Shop", new { id = item.Id })'" style="cursor: pointer;">
+                    <img src="~/@item.ImageUrl" alt="@item.Name">
+                    <div class="mota">
+                        <span>@item.Brand</span>
+                        <h5>@item.Name</h5>
+                        <div class="star">
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                        </div>
+                        <h4>$@item.Price.ToString("N2")</h4>
+                    </div>
+                    <div>
+                        <form asp-controller="Cart" asp-action="AddToCart" method="post" style="display:inline;" onclick="event.stopPropagation();">
+                            <input type="hidden" name="productId" value="@item.Id" />
+                            <input type="hidden" name="quantity" value="1" />
+                            <input type="hidden" name="size" value="L" />
+                            <button type="submit" style="background: none; border: none; cursor: pointer;">
+                                <i class="fa-solid fa-cart-plus cart"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</section>
+
+<!-- Popup Quảng Cáo -->
+<div id="popup">
+    <div class="popup-content">
+        <span id="close-popup">&times;</span>
+        <h2>🔥 Giảm giá 50%</h2>
+        <p>Ưu đãi đặc biệt cho quần áo mùa hè!</p>
+        <a asp-controller="Shop" asp-action="Index" class="normal" style="text-decoration: none; display: inline-block;">Mua ngay</a>
+    </div>
+</div>

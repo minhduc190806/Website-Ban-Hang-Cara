@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <link rel="icon" href="img/logotest.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <title>Đăng Nhập / Đăng Ký - MinhDucTH29.25</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <section id="header">
+        <a href="index.html"><img src="img/logotest.png" class="logo" alt="Logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a class="active" href="login.html"><i class="fa-regular fa-user"></i> Đăng Nhập</a></li>
+                <li id="lg-bag"><a href="cart.html"><i class="fa fa-cart-shopping"></i></a></li>
+                <li><a href="admin.html" style="color: #ffeaa7;"><i class="fa-solid fa-user-shield"></i> Admin</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Auth Section -->
+    <section id="auth-section">
+        <div class="auth-card">
+            <div class="auth-tabs">
+                <button type="button" class="auth-tab-btn active" id="tab-login-btn" onclick="showAuthTab('login')">
+                    <i class="fa-solid fa-right-to-bracket"></i> Đăng Nhập
+                </button>
+                <button type="button" class="auth-tab-btn" id="tab-register-btn" onclick="showAuthTab('register')">
+                    <i class="fa-solid fa-user-plus"></i> Đăng Ký
+                </button>
+            </div>
+
+            <div class="auth-body">
+                <!-- FORM ĐĂNG NHẬP -->
+                <form id="login-form" class="auth-form active" onsubmit="handleLogin(event)">
+                    <h2 style="font-size: 22px; margin-bottom: 20px; color: #1e293b; text-align: center;">Đăng Nhập Tài Khoản</h2>
+                    
+                    <div class="form-group">
+                        <label for="login-username">Tên đăng nhập hoặc Email *</label>
+                        <input type="text" id="login-username" required placeholder="admin hoặc minhduc@gmail.com" value="admin">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password">Mật khẩu *</label>
+                        <input type="password" id="login-password" required placeholder="Nhập mật khẩu" value="admin123">
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 15px 0; font-size: 14px;">
+                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                            <input type="checkbox" checked> Ghi nhớ đăng nhập
+                        </label>
+                        <a href="javascript:void(0)" onclick="alert('Vui lòng liên hệ quản trị viên qua trang Contact để lấy lại mật khẩu.')" style="color: #e94747; text-decoration: none;">Quên mật khẩu?</a>
+                    </div>
+
+                    <button type="submit" class="auth-btn-submit">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i> Đăng Nhập Ngay
+                    </button>
+
+                    <div class="demo-accounts">
+                        <strong>Tài khoản mẫu để kiểm thử:</strong><br>
+                        • <strong>Quản trị viên (Admin):</strong> <code>admin</code> / Mật khẩu: <code>admin123</code> (Đăng nhập vào thẳng trang Quản trị CRUD)<br>
+                        • <strong>Khách hàng:</strong> <code>minhduc@gmail.com</code> / Mật khẩu: <code>123456</code>
+                    </div>
+                </form>
+
+                <!-- FORM ĐĂNG KÝ -->
+                <form id="register-form" class="auth-form" onsubmit="handleRegister(event)">
+                    <h2 style="font-size: 22px; margin-bottom: 20px; color: #1e293b; text-align: center;">Tạo Tài Khoản Mới</h2>
+                    
+                    <div class="form-group">
+                        <label for="reg-name">Họ và Tên *</label>
+                        <input type="text" id="reg-name" required placeholder="Ví dụ: Nguyễn Văn A">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-phone">Số Điện Thoại *</label>
+                        <input type="tel" id="reg-phone" required placeholder="Ví dụ: 0912345678">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-email">Địa Chỉ Email *</label>
+                        <input type="email" id="reg-email" required placeholder="name@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-pass">Mật Khẩu *</label>
+                        <input type="password" id="reg-pass" required placeholder="Tối thiểu 6 ký tự">
+                    </div>
+
+                    <button type="submit" class="auth-btn-submit">
+                        <i class="fa-solid fa-user-check"></i> Đăng Ký Tài Khoản
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Chuẩn Hóa -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Cột 1 -->
+            <div class="footer-col">
+                <img src="img/logotest.png" class="logo-footer" alt="Logo">
+                <p><strong>Địa chỉ:</strong> Hà Nội, Việt Nam</p>
+                <p><strong>Điện thoại:</strong> 0123 456 789 / 0912345678</p>
+                <p><strong>Email:</strong> minhduc@gmail.com</p>
+                <p><strong>Giờ làm việc:</strong> 08:00 - 22:00, Thứ 2 - Thứ 7</p>
+                <div class="follow">
+                    <h4>Theo dõi chúng tôi</h4>
+                    <div class="icon">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-x-twitter"></i>
+                        <i class="fa-brands fa-youtube"></i>
+                        <i class="fa-brands fa-tiktok"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột 2 -->
+            <div class="footer-col">
+                <h4>Về Chúng Tôi</h4>
+                <a href="index.html">Trang Chủ</a>
+                <a href="about.html">Giới Thiệu (About)</a>
+                <a href="shop.html">Cửa Hàng (Shop)</a>
+                <a href="blog.html">Blog Thời Trang</a>
+                <a href="contact.html">Liên Hệ (Contact)</a>
+            </div>
+
+            <!-- Cột 3 -->
+            <div class="footer-col">
+                <h4>Tài Khoản & Đơn Hàng</h4>
+                <a href="login.html">Đăng Nhập / Đăng Ký</a>
+                <a href="cart.html">Xem Giỏ Hàng</a>
+                <a href="checkout.html">Thanh Toán Đơn Hàng</a>
+                <a href="admin.html">Trang Quản Trị Admin</a>
+            </div>
+
+            <!-- Cột 4 -->
+            <div class="footer-col">
+                <h4>Cài Đặt Ứng Dụng</h4>
+                <p>Tải app trên App Store hoặc Google Play</p>
+                <div class="app">
+                    <img src="img/pay/app.jpg" alt="App Store">
+                    <img src="img/pay/play.jpg" alt="Google Play">
+                </div>
+                <p style="margin-top: 10px;">Cổng thanh toán an toàn</p>
+                <img src="img/pay/pay.png" style="height: 35px;" alt="Pay Methods">
+            </div>
+
+            <div class="copyright">
+                <p>© 2026 MinhDucTH29.25 - Đồ án Website Thương Mại Điện Tử</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="cart.js"></script>
+    <script src="effect.js"></script>
+    <script>
+        function showAuthTab(tab) {
+            document.querySelectorAll(".auth-tab-btn").forEach(b => b.classList.remove("active"));
+            document.querySelectorAll(".auth-form").forEach(f => f.classList.remove("active"));
+
+            if (tab === 'login') {
+                document.getElementById("tab-login-btn").classList.add("active");
+                document.getElementById("login-form").classList.add("active");
+            } else {
+                document.getElementById("tab-register-btn").classList.add("active");
+                document.getElementById("register-form").classList.add("active");
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById("login-username").value.trim();
+            const p = document.getElementById("login-password").value.trim();
+
+            if (u.toLowerCase() === "admin" && p === "admin123") {
+                const user = { name: "Quản Trị Viên Minh Đức", role: "admin", username: "admin" };
+                localStorage.setItem("cara_user", JSON.stringify(user));
+                Cart.showToast("Đăng nhập quyền Admin thành công! Đang chuyển đến trang Quản trị...");
+                setTimeout(() => {
+                    window.location.href = "admin.html";
+                }, 1000);
+            } else if (u && p) {
+                const user = { name: u.includes("@") ? u.split("@")[0] : u, role: "customer", username: u };
+                localStorage.setItem("cara_user", JSON.stringify(user));
+                Cart.showToast(`Chào mừng ${user.name} đã đăng nhập thành công!`);
+                setTimeout(() => {
+                    window.location.href = "shop.html";
+                }, 1000);
+            } else {
+                Cart.showToast("Vui lòng nhập đầy đủ tài khoản và mật khẩu!", "error");
+            }
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById("reg-name").value.trim();
+            const email = document.getElementById("reg-email").value.trim();
+            const user = { name: name, role: "customer", username: email };
+            localStorage.setItem("cara_user", JSON.stringify(user));
+            Cart.showToast(`Chúc mừng ${name} đã đăng ký tài khoản thành công!`);
+            setTimeout(() => {
+                window.location.href = "shop.html";
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

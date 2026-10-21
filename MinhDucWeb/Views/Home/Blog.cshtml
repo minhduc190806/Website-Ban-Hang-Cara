@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "Blog Thời Trang";
+}
+
+<!-- Blog Home Hero -->
+<section id="blog-hero" style="background-image: url('/img/banner/b19.jpg'); padding: 80px 20px; text-align: center; color: #fff;">
+    <div class="blog-hero-content">
+        <h1 style="font-size: 42px; margin-bottom: 12px;">#Blog Thời Trang</h1>
+        <p style="font-size: 18px;">Cập nhật xu hướng mới nhất & kiến thức phối đồ hè 2026</p>
+    </div>
+</section>
+
+<!-- Blog Page -->
+<section id="blog" class="section-p1">
+    <div class="blog-box" style="display: flex; gap: 40px; margin-bottom: 50px; align-items: center;">
+        <div class="blog-img" style="width: 40%;">
+            <img src="~/img/blog/b1.jpg" alt="Blog 1" style="width: 100%; border-radius: 8px;">
+        </div>
+        <div class="blog-details" style="width: 60%;">
+            <h4 style="font-size: 24px; margin-bottom: 10px;">Phong Cách Streetwear Cá Tính Cùng Cartoon T-Shirt</h4>
+            <p style="line-height: 24px; color: #555; margin-bottom: 15px;">
+                Áo thun in hình phi hành gia cartoon kết hợp cùng quần jean baggy hoặc kaki túi hộp đang là trào lưu cực hot trong giới trẻ năm 2026.
+            </p>
+            <a asp-controller="Shop" asp-action="Index" style="color: #e94747; font-weight: 700; text-decoration: none;">Xem các mẫu áo liên quan →</a>
+        </div>
+    </div>
+
+    <div class="blog-box" style="display: flex; gap: 40px; margin-bottom: 50px; align-items: center;">
+        <div class="blog-img" style="width: 40%;">
+            <img src="~/img/blog/b2.jpg" alt="Blog 2" style="width: 100%; border-radius: 8px;">
+        </div>
+        <div class="blog-details" style="width: 60%;">
+            <h4 style="font-size: 24px; margin-bottom: 10px;">Bí Quyết Chọn Sơ Mi Cho Chuyến Đi Biển Rực Rỡ</h4>
+            <p style="line-height: 24px; color: #555; margin-bottom: 15px;">
+                Chất vải lụa tơ tằm cùng họa tiết hoa nhiệt đới Hawaii mang lại sự thoải mái tối đa và những bức ảnh sống ảo tuyệt đẹp.
+            </p>
+            <a asp-controller="Shop" asp-action="Index" style="color: #e94747; font-weight: 700; text-decoration: none;">Xem các mẫu sơ mi hè →</a>
+        </div>
+    </div>
+</section>

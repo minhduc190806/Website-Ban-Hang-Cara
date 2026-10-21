@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <link rel="icon" href="img/logotest.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <title>Blog Thời Trang & Phong Cách Sống - MinhDucTH29.25</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #blog {
+            padding: 50px 80px;
+        }
+        .blog-box {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            margin-bottom: 60px;
+            gap: 50px;
+        }
+        .blog-img {
+            width: 45%;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        .blog-img img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+            transition: 0.4s ease;
+        }
+        .blog-box:hover .blog-img img {
+            transform: scale(1.06);
+        }
+        .blog-details {
+            width: 55%;
+        }
+        .blog-details span.blog-date {
+            font-size: 14px;
+            font-weight: 700;
+            color: #e94747;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .blog-details h4 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 10px 0 15px 0;
+            line-height: 32px;
+        }
+        .blog-details p {
+            font-size: 15px;
+            color: #64748b;
+            line-height: 26px;
+            margin-bottom: 20px;
+        }
+        .blog-details a {
+            text-decoration: none;
+            font-size: 15px;
+            color: #1e293b;
+            font-weight: 700;
+            position: relative;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .blog-details a:hover {
+            color: #e94747;
+            transform: translateX(6px);
+        }
+        @media (max-width: 799px) {
+            #blog {
+                padding: 20px;
+            }
+            .blog-box {
+                flex-direction: column;
+                gap: 20px;
+                margin-bottom: 40px;
+            }
+            .blog-img, .blog-details {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <section id="header">
+        <a href="index.html"><img src="img/logotest.png" class="logo" alt="Logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a class="active" href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html"><i class="fa-regular fa-user"></i> Đăng Nhập</a></li>
+                <li id="lg-bag"><a href="cart.html"><i class="fa fa-cart-shopping"></i></a></li>
+                <li><a href="admin.html" style="color: #ffeaa7;"><i class="fa-solid fa-user-shield"></i> Admin</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Page Header Banner -->
+    <section id="page-header" class="blog-header" style="background-image: url('img/banner/b19.jpg'); padding: 80px 20px; text-align: center; color: #fff;">
+        <h2 style="font-size: 42px; margin-bottom: 12px;">#Blog Thời Trang & Xu Hướng</h2>
+        <p style="font-size: 18px;">Cập nhật các mẹo phối đồ hè năng động, phong cách Streetwear và xu hướng 2026</p>
+    </section>
+
+    <!-- Blog Page Articles -->
+    <section id="blog">
+        <!-- Bài 1 -->
+        <div class="blog-box">
+            <div class="blog-img">
+                <img src="img/blog/b1.jpg" alt="Blog 1">
+            </div>
+            <div class="blog-details">
+                <span class="blog-date">16/10/2026 • XU HƯỚNG MÙA HÈ</span>
+                <h4>Áo Thun Cotton Phi Hành Gia Cartoon - Cơn Sốt Streetwear Năm Nay</h4>
+                <p>
+                    Những chiếc áo phông in họa tiết cartoon phi hành gia độc đáo đang phủ sóng khắp các trang mạng xã hội. Với chất vải cotton 100% thoáng khí và co giãn 4 chiều, thiết kế này giúp bạn thoải mái cả ngày dài dù đi học, đi chơi hay dạo phố.
+                </p>
+                <a href="shop.html">Xem sản phẩm trong shop <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- Bài 2 -->
+        <div class="blog-box">
+            <div class="blog-img">
+                <img src="img/blog/b2.jpg" alt="Blog 2">
+            </div>
+            <div class="blog-details">
+                <span class="blog-date">14/10/2026 • PHỐI ĐỒ DU LỊCH</span>
+                <h4>Bí Quyết Chọn Áo Sơ Mi Họa Tiết Cho Chuyến Đi Biển Rực Rỡ</h4>
+                <p>
+                    Áo sơ mi cộc tay họa tiết hoa lá nhiệt đới Hawaii luôn là lựa chọn hàng đầu cho các chuyến du lịch biển. Hãy kết hợp cùng quần short kaki ống rộng và kính mát để có những bức ảnh check-in sống ảo cực chất.
+                </p>
+                <a href="shop.html">Khám phá sơ mi Hawaii <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- Bài 3 -->
+        <div class="blog-box">
+            <div class="blog-img">
+                <img src="img/blog/b3.jpg" alt="Blog 3">
+            </div>
+            <div class="blog-details">
+                <span class="blog-date">11/10/2026 • CẨM NANG MUA SẮM</span>
+                <h4>Hướng Dẫn Chọn Size Quần Áo Chuẩn Vừa Vặn Cho Từng Dáng Người</h4>
+                <p>
+                    Bạn băn khoăn không biết chọn Size S, M, L, XL hay XXL khi mua sắm online? Bảng quy đổi kích cỡ chuẩn theo chiều cao và cân nặng của MinhDuc Shop sẽ giúp bạn luôn chọn được form áo chuẩn đẹp như may đo.
+                </p>
+                <a href="shop.html">Xem hướng dẫn chọn size <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- Bài 4 -->
+        <div class="blog-box">
+            <div class="blog-img">
+                <img src="img/blog/b4.jpg" alt="Blog 4">
+            </div>
+            <div class="blog-details">
+                <span class="blog-date">08/10/2026 • BẢO QUẢN THỜI TRANG</span>
+                <h4>Cách Giặt Và Bảo Quản Áo Thun Không Bị Xù Lông, Bai Dão Cổ Áo</h4>
+                <p>
+                    Để chiếc áo thun yêu thích luôn bền màu và giữ form chuẩn sau nhiều lần giặt, hãy ghi nhớ những mẹo nhỏ như: giặt bằng nước lạnh, lộn trái khi phơi và tránh sử dụng chất tẩy rửa mạnh.
+                </p>
+                <a href="shop.html">Đọc thêm chia sẻ <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- Bài 5 -->
+        <div class="blog-box">
+            <div class="blog-img">
+                <img src="img/blog/b5.jpg" alt="Blog 5">
+            </div>
+            <div class="blog-details">
+                <span class="blog-date">05/10/2026 • PHONG CÁCH CÔNG SỞ</span>
+                <h4>Sơ Mi Oxford Basic - Mảnh Ghép Hoàn Hảo Cho Quý Ông Hiện Đại</h4>
+                <p>
+                    Đơn giản nhưng vô cùng tinh tế, áo sơ mi vải Oxford chống nhăn mang đến vẻ ngoài chỉn chu, lịch thiệp nơi công sở mà vẫn toát lên phong thái trẻ trung, năng động khi gặp gỡ bạn bè.
+                </p>
+                <a href="shop.html">Xem mẫu sơ mi Oxford <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- Bài 6 -->
+        <div class="blog-box">
+            <div class="blog-img">
+                <img src="img/blog/b6.jpg" alt="Blog 6">
+            </div>
+            <div class="blog-details">
+                <span class="blog-date">01/10/2026 • PHỤ KIỆN THỜI TRANG</span>
+                <h4>Top Phụ Kiện Không Thể Thiếu Giúp Nâng Tầm Bộ Trang Phục Của Bạn</h4>
+                <p>
+                    Một chiếc đồng hồ thể thao, mũ lưỡi trai hay balo cá tính sẽ biến set đồ đơn giản hàng ngày thành phong cách thời trang ấn tượng thu hút mọi ánh nhìn.
+                </p>
+                <a href="shop.html">Khám phá phụ kiện mới <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phân trang -->
+    <section id="pagination" class="phantrang" style="text-align: center; margin-bottom: 40px;">
+        <a href="blog.html" class="active" style="display:inline-block; padding:12px 18px; background:#e94747; color:#fff; border-radius:4px; text-decoration:none; font-weight:700;">1</a>
+        <a href="blog.html" style="display:inline-block; padding:12px 18px; background:#f1f5f9; color:#333; border-radius:4px; text-decoration:none; font-weight:700; margin-left:8px;">2</a>
+        <a href="blog.html" style="display:inline-block; padding:12px 18px; background:#f1f5f9; color:#333; border-radius:4px; text-decoration:none; font-weight:700; margin-left:8px;"><i class="fas fa-arrow-right"></i></a>
+    </section>
+
+    <!-- Newsletter -->
+    <section id="newsletter" class="section-p1 section-m1">
+        <div class="newstext">
+            <h4>Đăng Ký Nhận Bản Tin</h4>
+            <p>Nhận bài viết xu hướng thời trang mới nhất và <span>mã giảm giá qua Email.</span></p>
+        </div>
+        <div class="form">
+            <input type="email" placeholder="Nhập địa chỉ email của bạn">
+            <button class="normal">Đăng Ký</button>
+        </div>
+    </section>
+
+    <!-- Footer Chuẩn Hóa -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Cột 1 -->
+            <div class="footer-col">
+                <img src="img/logotest.png" class="logo-footer" alt="Logo">
+                <p><strong>Địa chỉ:</strong> Hà Nội, Việt Nam</p>
+                <p><strong>Điện thoại:</strong> 0123 456 789 / 0912345678</p>
+                <p><strong>Email:</strong> minhduc@gmail.com</p>
+                <p><strong>Giờ làm việc:</strong> 08:00 - 22:00, Thứ 2 - Thứ 7</p>
+                <div class="follow">
+                    <h4>Theo dõi chúng tôi</h4>
+                    <div class="icon">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-x-twitter"></i>
+                        <i class="fa-brands fa-youtube"></i>
+                        <i class="fa-brands fa-tiktok"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột 2 -->
+            <div class="footer-col">
+                <h4>Về Chúng Tôi</h4>
+                <a href="index.html">Trang Chủ</a>
+                <a href="about.html">Giới Thiệu (About)</a>
+                <a href="shop.html">Cửa Hàng (Shop)</a>
+                <a href="blog.html">Blog Thời Trang</a>
+                <a href="contact.html">Liên Hệ (Contact)</a>
+            </div>
+
+            <!-- Cột 3 -->
+            <div class="footer-col">
+                <h4>Tài Khoản & Đơn Hàng</h4>
+                <a href="login.html">Đăng Nhập / Đăng Ký</a>
+                <a href="cart.html">Xem Giỏ Hàng</a>
+                <a href="checkout.html">Thanh Toán Đơn Hàng</a>
+                <a href="admin.html">Trang Quản Trị Admin</a>
+            </div>
+
+            <!-- Cột 4 -->
+            <div class="footer-col">
+                <h4>Cài Đặt Ứng Dụng</h4>
+                <p>Tải app trên App Store hoặc Google Play</p>
+                <div class="app">
+                    <img src="img/pay/app.jpg" alt="App Store">
+                    <img src="img/pay/play.jpg" alt="Google Play">
+                </div>
+                <p style="margin-top: 10px;">Cổng thanh toán an toàn</p>
+                <img src="img/pay/pay.png" style="height: 35px;" alt="Pay Methods">
+            </div>
+
+            <div class="copyright">
+                <p>© 2026 MinhDucTH29.25 - Đồ án Website Thương Mại Điện Tử</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="cart.js"></script>
+    <script src="effect.js"></script>
+</body>
+</html>

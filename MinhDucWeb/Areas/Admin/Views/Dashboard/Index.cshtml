@@ -1,0 +1,100 @@
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Bảng Thống Kê Bán Hàng";
+    var recentOrders = ViewBag.RecentOrders as List<MinhDucWeb.Models.Order>;
+    int totalProducts = ViewBag.TotalProducts ?? 0;
+    int totalOrders = ViewBag.TotalOrders ?? 0;
+    decimal totalRevenue = ViewBag.TotalRevenue ?? 0;
+    int totalCustomers = ViewBag.TotalCustomers ?? 0;
+}
+
+<div class="admin-header-bar">
+    <h1>Tổng Quan Hoạt Động Cửa Hàng</h1>
+    <a asp-area="Admin" asp-controller="Products" asp-action="Create" class="btn-sm btn-add">
+        <i class="fa-solid fa-plus"></i> Thêm Sản Phẩm Mới
+    </a>
+</div>
+
+<!-- Stats Cards -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <i class="fa-solid fa-shirt stat-icon" style="color: #3498db;"></i>
+        <div class="stat-info">
+            <h4>Tổng Sản Phẩm</h4>
+            <p class="stat-value">@totalProducts</p>
+        </div>
+    </div>
+    <div class="stat-card stat-green">
+        <i class="fa-solid fa-file-invoice stat-icon" style="color: #2ecc71;"></i>
+        <div class="stat-info">
+            <h4>Tổng Hóa Đơn</h4>
+            <p class="stat-value">@totalOrders</p>
+        </div>
+    </div>
+    <div class="stat-card stat-orange">
+        <i class="fa-solid fa-money-bill-wave stat-icon" style="color: #e67e22;"></i>
+        <div class="stat-info">
+            <h4>Tổng Doanh Thu</h4>
+            <p class="stat-value">$@totalRevenue.ToString("N2")</p>
+        </div>
+    </div>
+    <div class="stat-card stat-red">
+        <i class="fa-solid fa-users stat-icon" style="color: #e74c3c;"></i>
+        <div class="stat-info">
+            <h4>Khách Hàng</h4>
+            <p class="stat-value">@totalCustomers</p>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Orders Table -->
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h2>5 Hóa Đơn / Đơn Hàng Mới Nhất</h2>
+        <a asp-area="Admin" asp-controller="Orders" asp-action="Index" style="color: #3498db; font-weight: 600; text-decoration: none;">Xem tất cả hóa đơn →</a>
+    </div>
+
+    @if (recentOrders != null && recentOrders.Any())
+    {
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Mã Đơn</th>
+                    <th>Ngày Đặt</th>
+                    <th>Khách Hàng</th>
+                    <th>Số Điện Thoại</th>
+                    <th>Tổng Tiền</th>
+                    <th>Trạng Thái</th>
+                    <th>Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var o in recentOrders)
+                {
+                    string badge = "badge-warning";
+                    if (o.Status == "Đã hoàn thành") badge = "badge-success";
+                    if (o.Status == "Đang giao") badge = "badge-primary";
+                    if (o.Status == "Đã hủy") badge = "badge-danger";
+
+                    <tr>
+                        <td><strong>@o.OrderCode</strong></td>
+                        <td>@o.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td><strong>@o.CustomerName</strong></td>
+                        <td>@o.CustomerPhone</td>
+                        <td><strong style="color: #e94747;">$@o.TotalAmount.ToString("N2")</strong></td>
+                        <td><span class="admin-badge @badge">@o.Status</span></td>
+                        <td>
+                            <a asp-area="Admin" asp-controller="Orders" asp-action="Detail" asp-route-id="@o.Id" class="btn-sm btn-view">
+                                <i class="fa fa-eye"></i> Chi tiết
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p style="color: #777; text-align: center; padding: 20px;">Chưa có đơn hàng nào.</p>
+    }
+</div>

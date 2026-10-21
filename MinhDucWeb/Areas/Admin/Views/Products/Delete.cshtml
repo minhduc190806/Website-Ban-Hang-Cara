@@ -1,0 +1,42 @@
+@model MinhDucWeb.Models.Product
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = $"Xóa Sản Phẩm #{Model.Id}";
+}
+
+<div class="admin-header-bar">
+    <div>
+        <h1 style="color: #e74c3c;">Xác Nhận Xóa Sản Phẩm</h1>
+        <p style="color: #666; margin-top: 5px;">Bạn có chắc chắn muốn xóa sản phẩm này khỏi cơ sở dữ liệu không?</p>
+    </div>
+    <a asp-area="Admin" asp-controller="Products" asp-action="Index" class="btn-sm btn-secondary">
+        ← Quay lại danh sách
+    </a>
+</div>
+
+<div class="admin-card" style="max-width: 700px; border-left: 5px solid #e74c3c;">
+    <div style="display: flex; gap: 30px; align-items: flex-start;">
+        <img src="~/@Model.ImageUrl" alt="@Model.Name" style="width: 140px; height: 140px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd;">
+        <div style="flex: 1; line-height: 28px;">
+            <h2 style="margin: 0 0 10px 0; font-size: 22px;">@Model.Name</h2>
+            <p><strong>Mã ID:</strong> #@Model.Id</p>
+            <p><strong>Danh mục:</strong> @(Model.Category?.Name ?? "Chưa phân loại")</p>
+            <p><strong>Thương hiệu:</strong> @Model.Brand</p>
+            <p><strong>Giá bán:</strong> <strong style="color: #e94747;">$@Model.Price.ToString("N2")</strong></p>
+            <p><strong>Số lượng tồn kho:</strong> @Model.Stock cái</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 25px; padding: 15px; background: #fff5f5; border-radius: 6px; color: #c53030; font-size: 14px;">
+        <i class="fa fa-exclamation-triangle"></i> <strong>Cảnh báo:</strong> Thao tác này sẽ xóa vĩnh viễn sản phẩm khỏi CSDL.
+    </div>
+
+    <form asp-area="Admin" asp-controller="Products" asp-action="Delete" method="post" style="margin-top: 25px; display: flex; justify-content: flex-end; gap: 15px;">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <a asp-area="Admin" asp-controller="Products" asp-action="Index" class="btn-sm btn-secondary">Hủy bỏ</a>
+        <button type="submit" class="btn-sm btn-delete" style="padding: 10px 25px; font-size: 15px;">
+            <i class="fa fa-trash"></i> Đồng Ý Xóa
+        </button>
+    </form>
+</div>

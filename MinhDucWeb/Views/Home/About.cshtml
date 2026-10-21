@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "Về Chúng Tôi";
+}
+
+<section class="about" style="padding: 60px 80px;">
+    <div class="about-container" style="display: flex; align-items: center; gap: 50px;">
+        <div class="about-text" style="flex: 1;">
+            <h1>About Us - MinhDuc Shop</h1>
+            <p style="font-size: 16px; line-height: 26px; color: #555; margin: 20px 0;">
+                Chào mừng bạn đến với hệ thống website thời trang của chúng tôi. 
+                Chúng tôi cung cấp những sản phẩm thời trang chất lượng cao với mức giá hợp lý và dịch vụ tận tâm.
+            </p>
+            <p style="font-size: 16px; line-height: 26px; color: #555; margin-bottom: 30px;">
+                Sứ mệnh của chúng tôi là mang đến trải nghiệm mua sắm trực tuyến đơn giản, nhanh chóng và đáng tin cậy cho mọi khách hàng.
+            </p>
+            <a asp-controller="Home" asp-action="Contact" class="normal" style="text-decoration: none; display: inline-block;">Liên Hệ Ngay</a>
+        </div>
+        <div class="about-image" style="flex: 1;">
+            <img src="~/img/about/a1.png" alt="About Us" style="width: 100%; border-radius: 8px;">
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter -->
+<section id="newsletter" class="section-p1 section-m1">
+    <div class="newstext">
+        <h4>Đăng ký nhận thông tin</h4>
+        <p>Nhận thông tin mới nhất qua Email về cửa hàng của chúng tôi</p>
+    </div>
+    <div class="form">
+        <input type="email" placeholder="Địa chỉ email của bạn">
+        <button class="normal">Đăng ký</button>
+    </div>
+</section>

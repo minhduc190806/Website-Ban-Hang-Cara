@@ -1,0 +1,126 @@
+@model MinhDucWeb.Models.Product
+@{
+    ViewData["Title"] = Model.Name;
+    var related = ViewBag.RelatedProducts as List<MinhDucWeb.Models.Product>;
+}
+
+<!-- Product Details Section -->
+<section id="prodetails" class="section-p1">
+    <div class="single-pro-image">
+        <div class="main-img-wrap">
+            <img src="~/@Model.ImageUrl" width="100%" id="MainImg" alt="@Model.Name">
+        </div>
+
+        <div class="small-img-group">
+            <div class="small-img-col active">
+                <img src="~/@Model.ImageUrl" width="100%" class="small-img" onclick="changeImage(this.src)" alt="Thumb 1">
+            </div>
+            <div class="small-img-col">
+                <img src="~/img/products/f2.jpg" width="100%" class="small-img" onclick="changeImage(this.src)" alt="Thumb 2">
+            </div>
+            <div class="small-img-col">
+                <img src="~/img/products/f3.jpg" width="100%" class="small-img" onclick="changeImage(this.src)" alt="Thumb 3">
+            </div>
+            <div class="small-img-col">
+                <img src="~/img/products/f4.jpg" width="100%" class="small-img" onclick="changeImage(this.src)" alt="Thumb 4">
+            </div>
+        </div>
+    </div>
+
+    <div class="single-pro-details">
+        <h6>Trang Chủ / @(Model.Category?.Name ?? "Thời Trang")</h6>
+        <h4>@Model.Name</h4>
+        <h2>
+            $@Model.Price.ToString("N2")
+            @if (Model.OldPrice.HasValue)
+            {
+                <span class="old-price">$@Model.OldPrice.Value.ToString("N2")</span>
+            }
+        </h2>
+
+        <form asp-controller="Cart" asp-action="AddToCart" method="post">
+            <input type="hidden" name="productId" value="@Model.Id" />
+
+            <div style="margin-bottom: 15px;">
+                <label for="size" style="font-weight: 700; display: block; margin-bottom: 6px;">Chọn Kích Cỡ (Size):</label>
+                <select id="size" name="size">
+                    <option value="S">Size S (Dưới 50kg)</option>
+                    <option value="M">Size M (50 - 62kg)</option>
+                    <option value="L" selected>Size L (63 - 72kg)</option>
+                    <option value="XL">Size XL (73 - 82kg)</option>
+                    <option value="XXL">Size XXL (Trên 82kg)</option>
+                </select>
+            </div>
+
+            <div class="purchase-action">
+                <input type="number" name="quantity" value="1" min="1" max="@Model.Stock">
+                <button type="submit" class="btn-add-cart">
+                    <i class="fa fa-cart-shopping"></i> Thêm Vào Giỏ Hàng
+                </button>
+            </div>
+        </form>
+
+        <p style="margin-bottom: 15px; color: #27ae60; font-weight: 600;">
+            <i class="fa fa-check-circle"></i> Tình trạng: Còn hàng (@Model.Stock sản phẩm có sẵn)
+        </p>
+
+        <h4 class="sub-title">Mô Tả Sản Phẩm</h4>
+        <span class="pro-desc">
+            @if (!string.IsNullOrEmpty(Model.Description))
+            {
+                @Model.Description
+            }
+            else
+            {
+                <span>Sản phẩm thời trang cao cấp thương hiệu @Model.Brand. Chất liệu thoáng mát, bền đẹp, đường may tỉ mỉ mang lại sự tự tin và phong cách cho người mặc.</span>
+            }
+        </span>
+    </div>
+</section>
+
+<!-- Related Products -->
+<section id="product1" class="sanpham" style="padding-top: 20px;">
+    <h2>Sản Phẩm Tương Tự</h2>
+    <p>Có Thể Bạn Cũng Thích</p>
+    <div id="product-container">
+        @if (related != null)
+        {
+            foreach (var item in related)
+            {
+                <div class="pro" onclick="window.location.href='@Url.Action("Detail", "Shop", new { id = item.Id })'" style="cursor: pointer;">
+                    <img src="~/@item.ImageUrl" alt="@item.Name">
+                    <div class="mota">
+                        <span>@item.Brand</span>
+                        <h5>@item.Name</h5>
+                        <div class="star">
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                        </div>
+                        <h4>$@item.Price.ToString("N2")</h4>
+                    </div>
+                    <div>
+                        <form asp-controller="Cart" asp-action="AddToCart" method="post" style="display:inline;" onclick="event.stopPropagation();">
+                            <input type="hidden" name="productId" value="@item.Id" />
+                            <input type="hidden" name="quantity" value="1" />
+                            <input type="hidden" name="size" value="L" />
+                            <button type="submit" style="background: none; border: none; cursor: pointer;">
+                                <i class="fa-solid fa-cart-plus cart"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        function changeImage(src) {
+            document.getElementById("MainImg").src = src;
+        }
+    </script>
+}

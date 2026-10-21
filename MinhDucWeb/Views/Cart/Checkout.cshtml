@@ -1,0 +1,107 @@
+@model List<MinhDucWeb.Models.CartItem>
+@{
+    ViewData["Title"] = "Thanh Toán Đơn Hàng";
+    decimal subtotal = Model?.Sum(i => i.Total) ?? 0;
+}
+
+<section id="checkout-section">
+    <h1 style="margin-bottom: 25px; font-size: 30px; text-align: center;">Thông Tin Thanh Toán & Đặt Hàng</h1>
+
+    <div class="checkout-wrapper">
+        <!-- Form thông tin khách hàng -->
+        <div class="checkout-form-container">
+            <h2>1. Thông Tin Người Nhận Hàng</h2>
+            <form asp-controller="Cart" asp-action="ProcessCheckout" method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <label for="fullName">Họ và Tên người nhận *</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Ví dụ: Nguyễn Minh Đức" required value="Nguyễn Minh Đức">
+                </div>
+
+                <div style="display: flex; gap: 20px;">
+                    <div class="form-group" style="flex: 1;">
+                        <label for="phone">Số Điện Thoại Liên Hệ *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Ví dụ: 0912345678" required value="0912345678">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label for="email">Địa Chỉ Email</label>
+                        <input type="email" id="email" name="email" placeholder="Ví dụ: minhduc@gmail.com" value="minhduc@gmail.com">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Địa Chỉ Nhận Hàng Chi Tiết *</label>
+                    <input type="text" id="address" name="address" placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/TP" required value="Số 123 Đường Cầu Giấy, Hà Nội">
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Ghi Chú Đơn Hàng (Tùy chọn)</label>
+                    <textarea id="notes" name="notes" rows="3" placeholder="Ghi chú thêm về thời gian giao hàng hoặc chỉ dẫn địa chỉ..."></textarea>
+                </div>
+
+                <h2 style="margin-top: 30px;">2. Phương Thức Thanh Toán</h2>
+                <div class="payment-methods">
+                    <label class="payment-method-item">
+                        <input type="radio" name="paymentMethod" value="COD (Thanh toán khi nhận hàng)" checked>
+                        <span><strong>COD</strong> - Thanh toán tiền mặt khi nhận hàng</span>
+                    </label>
+                    <label class="payment-method-item">
+                        <input type="radio" name="paymentMethod" value="Chuyển khoản ngân hàng">
+                        <span><strong>Chuyển Khoản Ngân Hàng</strong> (Vietcombank / MBBank / QR Code)</span>
+                    </label>
+                    <label class="payment-method-item">
+                        <input type="radio" name="paymentMethod" value="Ví điện tử MoMo / VNPAY">
+                        <span><strong>Ví Điện Tử MoMo / VNPAY</strong></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-checkout" style="font-size: 18px; margin-top: 25px;">
+                    <i class="fa-solid fa-shield-check"></i> Xác Nhận Đặt Hàng (Lưu Vào CSDL)
+                </button>
+            </form>
+        </div>
+
+        <!-- Tóm tắt đơn hàng -->
+        <div class="checkout-summary-container">
+            <h2>3. Tóm Tắt Đơn Hàng (@(Model?.Count ?? 0) món)</h2>
+            <div class="checkout-items-list">
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="checkout-item">
+                            <div class="checkout-item-info">
+                                <img src="~/@item.ImageUrl" alt="@item.ProductName">
+                                <div>
+                                    <h5 style="margin:0 0 4px 0; font-size:15px">@item.ProductName</h5>
+                                    <small style="color:#777">Size: @item.Size × @item.Quantity</small>
+                                </div>
+                            </div>
+                            <strong>$@item.Total.ToString("N2")</strong>
+                        </div>
+                    }
+                }
+            </div>
+
+            <div style="border-top: 1px solid #ddd; padding-top: 15px; margin-top: 15px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px;">
+                    <span>Tạm tính:</span>
+                    <strong>$@subtotal.ToString("N2")</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 15px;">
+                    <span>Phí vận chuyển:</span>
+                    <span style="color: #2ecc71; font-weight: 700;">Miễn phí</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 20px; font-weight: 800; color: #e94747; border-top: 2px dashed #eee; padding-top: 12px;">
+                    <span>Tổng Cộng:</span>
+                    <span>$@subtotal.ToString("N2")</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 25px; background: #eef2ff; padding: 15px; border-radius: 6px; font-size: 14px; color: #3730a3;">
+                <i class="fa-solid fa-lock"></i> Đơn hàng được bảo mật và tự động ghi vào các bảng Customers, Orders, OrderDetails trong CSDL SQL Server.
+            </div>
+        </div>
+    </div>
+</section>

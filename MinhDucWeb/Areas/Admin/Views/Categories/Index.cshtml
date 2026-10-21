@@ -1,0 +1,74 @@
+@model IEnumerable<MinhDucWeb.Models.Category>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Quản Lý Danh Mục Sản Phẩm";
+}
+
+<div class="admin-header-bar">
+    <div>
+        <h1>Quản Lý Danh Mục Sản Phẩm</h1>
+        <p style="color: #666; margin-top: 5px;">Thêm mới và cập nhật các nhóm danh mục hàng hóa</p>
+    </div>
+</div>
+
+<div style="display: flex; gap: 30px; flex-wrap: wrap;">
+    <!-- Form Thêm Danh Mục Mới -->
+    <div class="admin-card" style="flex: 1; min-width: 320px; height: fit-content;">
+        <div class="admin-card-header">
+            <h2>Thêm Danh Mục Mới</h2>
+        </div>
+        <form asp-area="Admin" asp-controller="Categories" asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label for="Name">Tên Danh Mục *</label>
+                <input type="text" id="Name" name="Name" class="form-control" placeholder="Ví dụ: Áo Khoác Mùa Đông" required />
+            </div>
+            <div class="form-group">
+                <label for="Description">Mô Tả Danh Mục</label>
+                <textarea id="Description" name="Description" rows="3" class="form-control" placeholder="Mô tả ngắn gọn..."></textarea>
+            </div>
+            <button type="submit" class="btn-sm btn-add" style="width: 100%; justify-content: center; padding: 12px; margin-top: 15px;">
+                <i class="fa fa-plus"></i> Thêm Danh Mục
+            </button>
+        </form>
+    </div>
+
+    <!-- Bảng Danh Mục Hiện Có -->
+    <div class="admin-card" style="flex: 2; min-width: 450px;">
+        <div class="admin-card-header">
+            <h2>Danh Sách Danh Mục Hiện Tại (@Model.Count())</h2>
+        </div>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th style="width: 50px;">ID</th>
+                    <th>Tên Danh Mục</th>
+                    <th>Mô Tả</th>
+                    <th>Số Sản Phẩm</th>
+                    <th style="width: 120px; text-align: center;">Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cat in Model)
+                {
+                    <tr>
+                        <td><strong>#@cat.Id</strong></td>
+                        <td><strong>@cat.Name</strong></td>
+                        <td><small style="color: #666;">@cat.Description</small></td>
+                        <td><span class="admin-badge badge-primary">@cat.Products.Count sản phẩm</span></td>
+                        <td style="text-align: center;">
+                            <form asp-area="Admin" asp-controller="Categories" asp-action="Delete" method="post" style="display:inline;" onsubmit="return confirm('Bạn có chắc muốn xóa danh mục này?');">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@cat.Id" />
+                                <button type="submit" class="btn-sm btn-delete" title="Xóa">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

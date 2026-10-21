@@ -1,0 +1,28 @@
+@{
+    ViewData["Title"] = "Đặt Hàng Thành Công";
+    var code = ViewBag.OrderCode as string;
+    var name = ViewBag.CustomerName as string;
+    var total = (decimal?)ViewBag.TotalAmount ?? 0;
+}
+
+<section class="section-p1">
+    <div class="success-box">
+        <i class="fa-solid fa-circle-check icon-success"></i>
+        <h1>Chúc Mừng Bạn Đã Đặt Hàng Thành Công!</h1>
+        <p>Cảm ơn bạn <strong>@name</strong> đã tin tưởng mua sắm tại <strong>MinhDuc Shop</strong>.</p>
+        
+        <div class="order-code-badge">
+            Mã Đơn Hàng: @code
+        </div>
+        
+        <p style="color: #555; margin-bottom: 30px; line-height: 24px;">
+            Đơn hàng với tổng trị giá <strong>$@total.ToString("N2")</strong> đã được lưu thành công vào cơ sở dữ liệu hệ thống (bảng <code>Orders</code> và <code>OrderDetails</code>).
+            Chúng tôi sẽ liên hệ trong thời gian sớm nhất để xác nhận và giao hàng.
+        </p>
+
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <a asp-controller="Shop" asp-action="Index" class="normal" style="text-decoration: none;">Tiếp Tục Mua Sắm</a>
+            <a asp-area="Admin" asp-controller="Orders" asp-action="Index" class="normal" style="text-decoration: none; background: #2c3e50;">Xem Trong Quản Trị Admin</a>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,107 @@
+@model IEnumerable<MinhDucWeb.Models.Product>
+@{
+    ViewData["Title"] = "Cửa Hàng Thời Trang";
+    var categories = ViewBag.Categories as List<MinhDucWeb.Models.Category>;
+    int? currentCatId = ViewBag.CurrentCategoryId as int?;
+    string? currentSearch = ViewBag.CurrentSearch as string;
+}
+
+<!-- Slide Show -->
+<section id="Slideshow">
+    <div class="slideshow-container">
+        <div class="mySlides fade" style="display: block;">
+            <img src="~/img/banner/b3.png" alt="Slide 1">
+            <div class="slide-content">
+                <h2>Summer Collection 2026</h2>
+                <p>Giảm giá đến 50% toàn bộ sản phẩm</p>
+                <a asp-controller="Shop" asp-action="Index" class="normal" style="text-decoration:none; display:inline-block;">Mua Ngay</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bộ Lọc & Tìm Kiếm -->
+<section class="section-p1" style="padding-top: 30px; padding-bottom: 10px;">
+    <form method="get" asp-controller="Shop" asp-action="Index" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+        <input type="text" name="search" value="@currentSearch" placeholder="Tìm kiếm tên sản phẩm, thương hiệu..." 
+               style="padding: 12px 20px; width: 350px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; outline: none;">
+        
+        <select name="categoryId" style="padding: 12px 18px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; outline: none; background: #fff;">
+            <option value="">-- Tất cả danh mục --</option>
+            @if (categories != null)
+            {
+                foreach (var cat in categories)
+                {
+                    if (currentCatId == cat.Id)
+                    {
+                        <option value="@cat.Id" selected>@cat.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@cat.Id">@cat.Name</option>
+                    }
+                }
+            }
+        </select>
+
+        <button type="submit" class="normal" style="padding: 12px 25px; font-size: 15px;">
+            <i class="fa fa-search"></i> Tìm Kiếm
+        </button>
+
+        @if (!string.IsNullOrEmpty(currentSearch) || currentCatId.HasValue)
+        {
+            <a asp-controller="Shop" asp-action="Index" style="align-self: center; color: #e74c3c; font-weight: 600; text-decoration: underline;">
+                Xóa bộ lọc
+            </a>
+        }
+    </form>
+</section>
+
+<!-- Danh Sách Sản Phẩm -->
+<section id="product1" class="sanpham">
+    <h2>Tất Cả Sản Phẩm (@Model.Count())</h2>
+    <p>Chọn sản phẩm ưng ý và thêm ngay vào giỏ hàng của bạn</p>
+    
+    <div id="product-container">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <div class="pro" onclick="window.location.href='@Url.Action("Detail", "Shop", new { id = item.Id })'" style="cursor: pointer;">
+                    <img src="~/@item.ImageUrl" alt="@item.Name">
+                    <div class="mota">
+                        <span>@item.Brand - @item.Category?.Name</span>
+                        <h5>@item.Name</h5>
+                        <div class="star">
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                            <i class="fa fa-star checked" style="color: #f39c12;"></i>
+                        </div>
+                        <h4>$@item.Price.ToString("N2")</h4>
+                    </div>
+                    <div>
+                        <form asp-controller="Cart" asp-action="AddToCart" method="post" style="display:inline;" onclick="event.stopPropagation();">
+                            <input type="hidden" name="productId" value="@item.Id" />
+                            <input type="hidden" name="quantity" value="1" />
+                            <input type="hidden" name="size" value="L" />
+                            <button type="submit" style="background: none; border: none; cursor: pointer;">
+                                <i class="fa-solid fa-cart-plus cart"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div style="width: 100%; text-align: center; padding: 50px 0;">
+                <i class="fa fa-box-open" style="font-size: 50px; color: #bbb; margin-bottom: 15px;"></i>
+                <h3>Không tìm thấy sản phẩm nào phù hợp!</h3>
+                <p>Hãy thử tìm kiếm bằng từ khóa khác hoặc xóa bộ lọc.</p>
+                <a asp-controller="Shop" asp-action="Index" class="normal" style="text-decoration:none; display:inline-block; margin-top: 15px;">Xem Tất Cả</a>
+            </div>
+        }
+    </div>
+</section>

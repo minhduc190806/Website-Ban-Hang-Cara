@@ -1,0 +1,91 @@
+@model MinhDucWeb.Models.Order
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = $"Chi Tiết Hóa Đơn {Model.OrderCode}";
+}
+
+<div class="admin-header-bar">
+    <div>
+        <h1>Chi Tiết Hóa Đơn @Model.OrderCode</h1>
+        <p style="color: #666; margin-top: 5px;">Ngày đặt: @Model.OrderDate.ToString("dd/MM/yyyy HH:mm")</p>
+    </div>
+    <a asp-area="Admin" asp-controller="Orders" asp-action="Index" class="btn-sm btn-secondary">
+        ← Quay lại danh sách
+    </a>
+</div>
+
+<div style="display: flex; gap: 30px; flex-wrap: wrap;">
+    <!-- Thông tin khách hàng & Giao hàng -->
+    <div class="admin-card" style="flex: 1; min-width: 320px;">
+        <div class="admin-card-header">
+            <h2>Thông Tin Khách Hàng</h2>
+        </div>
+        <p><strong>Họ và tên:</strong> @Model.CustomerName</p>
+        <p><strong>Số điện thoại:</strong> @Model.CustomerPhone</p>
+        <p><strong>Email:</strong> @(Model.CustomerEmail ?? "Không có")</p>
+        <p><strong>Địa chỉ giao:</strong> @Model.ShippingAddress</p>
+        <p><strong>Phương thức thanh toán:</strong> @Model.PaymentMethod</p>
+        @if (!string.IsNullOrEmpty(Model.OrderNotes))
+        {
+            <p><strong>Ghi chú:</strong> <em>@Model.OrderNotes</em></p>
+        }
+
+        <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
+
+        <!-- Form cập nhật trạng thái -->
+        <h3>Cập Nhật Trạng Thái Đơn Hàng</h3>
+        <form asp-area="Admin" asp-controller="Orders" asp-action="UpdateStatus" method="post" style="margin-top: 15px;">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="id" value="@Model.Id" />
+            <div style="display: flex; gap: 10px;">
+                <select name="status" class="form-control" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="Chờ xử lý" selected="@(Model.Status == "Chờ xử lý")">Chờ xử lý</option>
+                    <option value="Đã xác nhận" selected="@(Model.Status == "Đã xác nhận")">Đã xác nhận</option>
+                    <option value="Đang giao" selected="@(Model.Status == "Đang giao")">Đang giao</option>
+                    <option value="Đã hoàn thành" selected="@(Model.Status == "Đã hoàn thành")">Đã hoàn thành</option>
+                    <option value="Đã hủy" selected="@(Model.Status == "Đã hủy")">Đã hủy</option>
+                </select>
+                <button type="submit" class="btn-sm btn-edit">Cập Nhật</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Danh sách mặt hàng mua trong hóa đơn (OrderDetails) -->
+    <div class="admin-card" style="flex: 1.5; min-width: 450px;">
+        <div class="admin-card-header">
+            <h2>Danh Sách Sản Phẩm Đặt Mua (@Model.OrderDetails.Count mặt hàng)</h2>
+        </div>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Hình Ảnh</th>
+                    <th>Sản Phẩm</th>
+                    <th>Size</th>
+                    <th>Đơn Giá</th>
+                    <th>Số Lượng</th>
+                    <th>Thành Tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var d in Model.OrderDetails)
+                {
+                    <tr>
+                        <td><img src="~/@d.ProductImage" alt="@d.ProductName"></td>
+                        <td><strong>@d.ProductName</strong></td>
+                        <td><span class="admin-badge badge-warning">@d.Size</span></td>
+                        <td>$@d.Price.ToString("N2")</td>
+                        <td>@d.Quantity</td>
+                        <td><strong style="color: #e94747;">$@d.SubTotal.ToString("N2")</strong></td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr style="border-top: 2px solid #2c3e50; font-size: 16px;">
+                    <td colspan="5" style="text-align: right; font-weight: 700;">Tổng Tiền Hóa Đơn:</td>
+                    <td><strong style="color: #e94747; font-size: 20px;">$@Model.TotalAmount.ToString("N2")</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

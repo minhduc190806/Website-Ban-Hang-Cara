@@ -1,0 +1,57 @@
+@model IEnumerable<MinhDucWeb.Models.Order>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Quản Lý Đơn Hàng";
+}
+
+<div class="admin-header-bar">
+    <div>
+        <h1>Quản Lý Hóa Đơn & Đơn Hàng</h1>
+        <p style="color: #666; margin-top: 5px;">Danh sách tất cả hóa đơn mua hàng từ khách hàng trong CSDL</p>
+    </div>
+</div>
+
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h2>Tổng Số Hóa Đơn: @Model.Count()</h2>
+    </div>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Mã Hóa Đơn</th>
+                <th>Ngày Đặt</th>
+                <th>Tên Khách Hàng</th>
+                <th>Số Điện Thoại</th>
+                <th>Địa Chỉ Giao Hàng</th>
+                <th>Tổng Tiền</th>
+                <th>Trạng Thái</th>
+                <th style="width: 160px; text-align: center;">Thao Tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var o in Model)
+            {
+                string badge = "badge-warning";
+                if (o.Status == "Đã hoàn thành") badge = "badge-success";
+                if (o.Status == "Đang giao") badge = "badge-primary";
+                if (o.Status == "Đã hủy") badge = "badge-danger";
+
+                <tr>
+                    <td><strong>@o.OrderCode</strong></td>
+                    <td>@o.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td><strong>@o.CustomerName</strong></td>
+                    <td>@o.CustomerPhone</td>
+                    <td><small>@o.ShippingAddress</small></td>
+                    <td><strong style="color: #e94747;">$@o.TotalAmount.ToString("N2")</strong></td>
+                    <td><span class="admin-badge @badge">@o.Status</span></td>
+                    <td style="text-align: center;">
+                        <a asp-area="Admin" asp-controller="Orders" asp-action="Detail" asp-route-id="@o.Id" class="btn-sm btn-view">
+                            <i class="fa fa-eye"></i> Xem Chi Tiết
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

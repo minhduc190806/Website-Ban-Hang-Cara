@@ -1,0 +1,117 @@
+@using Microsoft.AspNetCore.Http
+@{
+    var session = Context.Session;
+    var cartJson = session?.GetString("SHOP_CART_SESSION");
+    int cartCount = 0;
+    if (!string.IsNullOrEmpty(cartJson))
+    {
+        try {
+            var items = System.Text.Json.JsonSerializer.Deserialize<List<MinhDucWeb.Models.CartItem>>(cartJson);
+            cartCount = items?.Sum(i => i.Quantity) ?? 0;
+        } catch {}
+    }
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/img/logotest.png" type="image/png">
+    <title>@ViewData["Title"] - MinhDucTH29.25</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="~/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <section id="header">
+        <a asp-controller="Home" asp-action="Index"><img src="~/img/logotest.png" class="logo" alt="Logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a asp-controller="Home" asp-action="Index">Trang Chủ</a></li>
+                <li><a asp-controller="Shop" asp-action="Index">Shop</a></li>
+                <li><a asp-controller="Home" asp-action="Blog">Blog</a></li>
+                <li><a asp-controller="Home" asp-action="About">About</a></li>
+                <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                <li><a href="/login.html"><i class="fa-regular fa-user"></i> Đăng Nhập</a></li>
+                <li id="lg-bag">
+                    <a asp-controller="Cart" asp-action="Index">
+                        <i class="fa fa-cart-shopping"></i>
+                        @if (cartCount > 0)
+                        {
+                            <span class="cart-badge">@cartCount</span>
+                        }
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" style="color: #ffeaa7;">
+                        <i class="fa-solid fa-user-shield"></i> Quản Trị
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    @RenderBody()
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <img class="logo-footer" src="~/img/logotest.png" alt="Logo">
+                <p><strong>Địa chỉ: </strong> Hà Nội, Việt Nam</p>
+                <p><strong>Điện thoại: </strong> 0123 456 789 / 0912345678</p>
+                <p><strong>Email: </strong> minhduc@gmail.com</p>
+                <p><strong>Giờ làm việc: </strong> 08:00 - 22:00, Thứ 2 - Thứ 7</p>
+                <div class="follow">
+                    <h4>Theo dõi chúng tôi</h4>
+                    <div class="icon">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-x-twitter"></i>
+                        <i class="fa-brands fa-youtube"></i>
+                        <i class="fa-brands fa-tiktok"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Về chúng tôi</h4>
+                <a asp-controller="Home" asp-action="Index">Trang Chủ</a>
+                <a asp-controller="Home" asp-action="About">Giới thiệu (About)</a>
+                <a asp-controller="Shop" asp-action="Index">Cửa hàng (Shop)</a>
+                <a asp-controller="Home" asp-action="Blog">Blog thời trang</a>
+                <a asp-controller="Home" asp-action="Contact">Liên hệ (Contact)</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Tài khoản & Đơn hàng</h4>
+                <a href="/login.html">Đăng nhập / Đăng ký</a>
+                <a asp-controller="Cart" asp-action="Index">Xem giỏ hàng</a>
+                <a asp-controller="Cart" asp-action="Checkout">Thanh toán đơn hàng</a>
+                <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Trang Quản trị Admin</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Cài đặt ứng dụng</h4>
+                <p>Tải app trên App Store hoặc Google Play</p>
+                <div class="app">
+                    <img src="~/img/pay/app.jpg" alt="App Store">
+                    <img src="~/img/pay/play.jpg" alt="Google Play">
+                </div>
+                <p style="margin-top: 10px;">Cổng thanh toán an toàn</p>
+                <img src="~/img/pay/pay.png" style="height: 35px;" alt="Payment">
+            </div>
+
+            <div class="copyright">
+                <p>© 2026 MinhDucTH29.25 - Đồ án Website Thương Mại Điện Tử (ASP.NET Core & SQL Server)</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/effect.js"></script>
+    <script src="~/popup.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

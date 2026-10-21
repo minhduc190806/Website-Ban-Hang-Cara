@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <link rel="icon" href="img/logotest.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <title>Giới Thiệu Về Chúng Tôi - MinhDucTH29.25</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #about-head {
+            display: flex;
+            align-items: center;
+            padding: 40px 80px;
+            gap: 50px;
+        }
+        #about-head img {
+            width: 50%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        #about-head div {
+            width: 50%;
+        }
+        #about-head h2 {
+            font-size: 36px;
+            color: #222;
+            margin-bottom: 20px;
+        }
+        #about-head p {
+            line-height: 26px;
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        #about-app {
+            text-align: center;
+            padding: 40px 80px;
+        }
+        #about-app h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        #about-app .video {
+            width: 70%;
+            height: 100%;
+            margin: 30px auto 0 auto;
+        }
+        #about-app .video video {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        @media (max-width: 799px) {
+            #about-head {
+                flex-direction: column;
+                padding: 20px;
+            }
+            #about-head img, #about-head div {
+                width: 100%;
+            }
+            #about-app .video {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <section id="header">
+        <a href="index.html"><img src="img/logotest.png" class="logo" alt="Logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a class="active" href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html"><i class="fa-regular fa-user"></i> Đăng Nhập</a></li>
+                <li id="lg-bag"><a href="cart.html"><i class="fa fa-cart-shopping"></i></a></li>
+                <li><a href="admin.html" style="color: #ffeaa7;"><i class="fa-solid fa-user-shield"></i> Admin</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Page Header Banner -->
+    <section id="page-header" class="about-header" style="background-image: url('img/about/banner.png'); padding: 80px 20px; text-align: center; color: #fff;">
+        <h2 style="font-size: 42px; margin-bottom: 12px;">#VềChúngTôi - MinhDuc Shop</h2>
+        <p style="font-size: 18px;">Khám phá câu chuyện thương hiệu và cam kết chất lượng thời trang hàng đầu</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about-head">
+        <img src="img/about/a6.jpg" alt="Về chúng tôi">
+        <div>
+            <h2>Chúng Tôi Là Ai?</h2>
+            <p>
+                Chào mừng bạn đến với <strong>MinhDuc Shop (Cara eCommerce)</strong>. 
+                Chúng tôi tự hào là thương hiệu thời trang trẻ trung, năng động, mang đến cho khách hàng những sản phẩm may mặc cao cấp với mẫu mã phong phú từ áo phông, sơ mi hè, trang phục dạo phố đến các phụ kiện thời thượng.
+            </p>
+            <p>
+                Với sứ mệnh định hình phong cách cá nhân tự tin và thoải mái nhất, từng sản phẩm của chúng tôi đều trải qua quy trình tuyển chọn chất liệu nghiêm ngặt, từ vải cotton 100% co giãn 4 chiều thoáng khí đến các đường may tinh xảo đạt tiêu chuẩn xuất khẩu.
+            </p>
+            <abbr title="Cam kết chất lượng">
+                Chúng tôi luôn nỗ lực không ngừng để tạo ra những trải nghiệm mua sắm trực tuyến nhanh chóng, tiện lợi, an toàn và dịch vụ chăm sóc khách hàng chu đáo nhất.
+            </abbr>
+            <br><br>
+            <marquee bgcolor="#f8fafc" loop="-1" scrollamount="5" width="100%" style="padding: 10px; border-radius: 6px; font-weight: 600; color: #e94747;">
+                🔥 Miễn phí vận chuyển toàn quốc cho tất cả đơn hàng - Đổi trả linh hoạt trong vòng 30 ngày - Hỗ trợ tận tâm 24/7!
+            </marquee>
+        </div>
+    </section>
+
+    <!-- Video Showcase -->
+    <section id="about-app">
+        <h1>Trải Nghiệm <a href="shop.html" style="color: #e94747; text-decoration: underline;">Không Gian Cửa Hàng</a> Thực Tế</h1>
+        <div class="video">
+            <video autoplay muted loop src="img/about/1.mp4"></video>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="tinhnang">
+        <div class="box">
+            <img src="img/features/f1.png" alt="Free Shipping">
+            <h5>Miễn phí vận chuyển</h5>
+        </div>
+        <div class="box">
+            <img src="img/features/f2.png" alt="Online Order">
+            <h5>Đặt hàng online</h5>
+        </div> 
+        <div class="box">
+            <img src="img/features/f3.png" alt="Save Money">
+            <h5>Tiết kiệm chi phí</h5>
+        </div>
+        <div class="box">
+            <img src="img/features/f4.png" alt="Promotions">
+            <h5>Khuyến mãi hấp dẫn</h5>
+        </div> 
+        <div class="box">
+            <img src="img/features/f5.png" alt="Easy Return">
+            <h5>Đổi trả thuận tiện</h5>
+        </div> 
+        <div class="box">
+            <img src="img/features/f6.png" alt="Support 24/7">
+            <h5>Hỗ trợ tận tình 24/7</h5>
+        </div>  
+    </section>
+
+    <!-- Newsletter -->
+    <section id="newsletter" class="section-p1 section-m1">
+        <div class="newstext">
+            <h4>Đăng Ký Nhận Bản Tin</h4>
+            <p>Nhận thông tin cập nhật qua E-mail về các sản phẩm mới và <span>ưu đãi giảm giá 50%.</span></p>
+        </div>
+        <div class="form">
+            <input type="email" placeholder="Nhập địa chỉ email của bạn">
+            <button class="normal">Đăng Ký</button>
+        </div>
+    </section>
+
+    <!-- Footer Chuẩn Hóa -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Cột 1 -->
+            <div class="footer-col">
+                <img src="img/logotest.png" class="logo-footer" alt="Logo">
+                <p><strong>Địa chỉ:</strong> Hà Nội, Việt Nam</p>
+                <p><strong>Điện thoại:</strong> 0123 456 789 / 0912345678</p>
+                <p><strong>Email:</strong> minhduc@gmail.com</p>
+                <p><strong>Giờ làm việc:</strong> 08:00 - 22:00, Thứ 2 - Thứ 7</p>
+                <div class="follow">
+                    <h4>Theo dõi chúng tôi</h4>
+                    <div class="icon">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-x-twitter"></i>
+                        <i class="fa-brands fa-youtube"></i>
+                        <i class="fa-brands fa-tiktok"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột 2 -->
+            <div class="footer-col">
+                <h4>Về Chúng Tôi</h4>
+                <a href="index.html">Trang Chủ</a>
+                <a href="about.html">Giới Thiệu (About)</a>
+                <a href="shop.html">Cửa Hàng (Shop)</a>
+                <a href="blog.html">Blog Thời Trang</a>
+                <a href="contact.html">Liên Hệ (Contact)</a>
+            </div>
+
+            <!-- Cột 3 -->
+            <div class="footer-col">
+                <h4>Tài Khoản & Đơn Hàng</h4>
+                <a href="login.html">Đăng Nhập / Đăng Ký</a>
+                <a href="cart.html">Xem Giỏ Hàng</a>
+                <a href="checkout.html">Thanh Toán Đơn Hàng</a>
+                <a href="admin.html">Trang Quản Trị Admin</a>
+            </div>
+
+            <!-- Cột 4 -->
+            <div class="footer-col">
+                <h4>Cài Đặt Ứng Dụng</h4>
+                <p>Tải app trên App Store hoặc Google Play</p>
+                <div class="app">
+                    <img src="img/pay/app.jpg" alt="App Store">
+                    <img src="img/pay/play.jpg" alt="Google Play">
+                </div>
+                <p style="margin-top: 10px;">Cổng thanh toán an toàn</p>
+                <img src="img/pay/pay.png" style="height: 35px;" alt="Pay Methods">
+            </div>
+
+            <div class="copyright">
+                <p>© 2026 MinhDucTH29.25 - Đồ án Website Thương Mại Điện Tử</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="cart.js"></script>
+    <script src="effect.js"></script>
+</body>
+</html>

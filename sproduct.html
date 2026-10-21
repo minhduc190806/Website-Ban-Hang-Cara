@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <link rel="icon" href="img/logotest.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <title>Chi Tiết Sản Phẩm - MinhDucTH29.25</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <section id="header">
+        <a href="index.html"><img src="img/logotest.png" class="logo" alt="Logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a class="active" href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html"><i class="fa-regular fa-user"></i> Đăng Nhập</a></li>
+                <li id="lg-bag"><a href="cart.html"><i class="fa fa-cart-shopping"></i></a></li>
+                <li><a href="admin.html" style="color: #ffeaa7;"><i class="fa-solid fa-user-shield"></i> Admin</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Product Details Section -->
+    <section id="prodetails" class="section-p1">
+        <div class="single-pro-image">
+            <div class="main-img-wrap">
+                <img src="img/products/f1.jpg" width="100%" id="MainImg" alt="Chi tiết sản phẩm">
+            </div>
+
+            <div class="small-img-group">
+                <div class="small-img-col active">
+                    <img src="img/products/f1.jpg" width="100%" class="small-img" alt="Ảnh 1">
+                </div>
+                <div class="small-img-col">
+                    <img src="img/products/f2.jpg" width="100%" class="small-img" alt="Ảnh 2">
+                </div>
+                <div class="small-img-col">
+                    <img src="img/products/f3.jpg" width="100%" class="small-img" alt="Ảnh 3">
+                </div>
+                <div class="small-img-col">
+                    <img src="img/products/f4.jpg" width="100%" class="small-img" alt="Ảnh 4">
+                </div>
+            </div>
+        </div>
+
+        <div class="single-pro-details">
+            <h6 id="pro-category">Trang Chủ / Áo Thun & Sơ Mi Hè</h6>
+            <h4 id="pro-name">Cartoon Astronaut T-Shirts V1</h4>
+            <h2 id="pro-price">$100 <span class="old-price">$140</span></h2>
+
+            <div style="margin-bottom: 15px;">
+                <label for="pro-size" style="font-weight: 700; display: block; margin-bottom: 5px;">Chọn Kích Cỡ (Size):</label>
+                <select id="pro-size">
+                    <option value="S">Size S (Dưới 50kg)</option>
+                    <option value="M">Size M (50 - 62kg)</option>
+                    <option value="L" selected>Size L (63 - 72kg)</option>
+                    <option value="XL">Size XL (73 - 82kg)</option>
+                    <option value="XXL">Size XXL (Trên 82kg)</option>
+                </select>
+            </div>
+
+            <div class="purchase-action">
+                <input type="number" id="pro-quantity" value="1" min="1" max="99">
+                <button class="btn-add-cart" id="btn-add-to-cart">
+                    <i class="fa fa-cart-shopping"></i> Thêm Vào Giỏ Hàng
+                </button>
+            </div>
+
+            <h4 class="sub-title">Mô Tả Sản Phẩm</h4>
+            <span class="pro-desc" id="pro-desc">
+                Áo thun cotton cao cấp in hình phi hành gia cartoon sắc nét, chất liệu thoáng khí, co giãn 4 chiều mang lại cảm giác thoải mái suốt cả ngày dài. Dễ dàng phối đồ cùng quần jeans, quần short hay chân váy cá tính.
+            </span>
+        </div>
+    </section>
+
+    <!-- Related Products (Dàn Hàng Ngang 4 Sản Phẩm Chuẩn Đẹp) -->
+    <section id="product1" class="sanpham" style="padding-top: 30px;">
+        <h2>Sản Phẩm Tương Tự</h2>
+        <p>Bộ Sưu Tập Mùa Hè Hot Nhất Năm Nay</p>
+        <div id="product-container" class="pro-container">
+            <!-- Được render tự động theo hàng ngang bởi cart.js -->
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section id="newsletter" class="section-p1 section-m1">
+        <div class="newstext">
+            <h4>Đăng Ký Nhận Bản Tin</h4>
+            <p>Nhận thông tin cập nhật qua E-mail về các sản phẩm mới và <span>ưu đãi đặc biệt.</span></p>
+        </div>
+        <div class="form">
+            <input type="text" placeholder="Nhập địa chỉ email của bạn">
+            <button class="normal">Đăng Ký</button>
+        </div>
+    </section>
+
+    <!-- Footer Chuẩn Hóa -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Cột 1 -->
+            <div class="footer-col">
+                <img src="img/logotest.png" class="logo-footer" alt="Logo">
+                <p><strong>Địa chỉ:</strong> Hà Nội, Việt Nam</p>
+                <p><strong>Điện thoại:</strong> 0123 456 789 / 0912345678</p>
+                <p><strong>Email:</strong> minhduc@gmail.com</p>
+                <p><strong>Giờ làm việc:</strong> 08:00 - 22:00, Thứ 2 - Thứ 7</p>
+                <div class="follow">
+                    <h4>Theo dõi chúng tôi</h4>
+                    <div class="icon">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-x-twitter"></i>
+                        <i class="fa-brands fa-youtube"></i>
+                        <i class="fa-brands fa-tiktok"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột 2 -->
+            <div class="footer-col">
+                <h4>Về Chúng Tôi</h4>
+                <a href="index.html">Trang Chủ</a>
+                <a href="about.html">Giới Thiệu (About)</a>
+                <a href="shop.html">Cửa Hàng (Shop)</a>
+                <a href="blog.html">Blog Thời Trang</a>
+                <a href="contact.html">Liên Hệ (Contact)</a>
+            </div>
+
+            <!-- Cột 3 -->
+            <div class="footer-col">
+                <h4>Tài Khoản & Đơn Hàng</h4>
+                <a href="login.html">Đăng Nhập / Đăng Ký</a>
+                <a href="cart.html">Xem Giỏ Hàng</a>
+                <a href="checkout.html">Thanh Toán Đơn Hàng</a>
+                <a href="admin.html">Trang Quản Trị Admin</a>
+            </div>
+
+            <!-- Cột 4 -->
+            <div class="footer-col">
+                <h4>Cài Đặt Ứng Dụng</h4>
+                <p>Tải app trên App Store hoặc Google Play</p>
+                <div class="app">
+                    <img src="img/pay/app.jpg" alt="App Store">
+                    <img src="img/pay/play.jpg" alt="Google Play">
+                </div>
+                <p style="margin-top: 10px;">Cổng thanh toán an toàn</p>
+                <img src="img/pay/pay.png" style="height: 35px;" alt="Pay Methods">
+            </div>
+
+            <div class="copyright">
+                <p>© 2026 MinhDucTH29.25 - Đồ án Website Thương Mại Điện Tử</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="cart.js"></script>
+    <script src="effect.js"></script>
+</body>
+</html>
