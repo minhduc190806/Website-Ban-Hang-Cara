@@ -1,0 +1,125 @@
+@{
+    ViewData["Title"] = "Đăng Nhập / Đăng Ký Tài Khoản";
+}
+
+<!-- Auth Section -->
+<section id="auth-section">
+    <div class="auth-card">
+        <div class="auth-tabs">
+            <button type="button" class="auth-tab-btn active" id="tab-login-btn" onclick="showAuthTab('login')">
+                <i class="fa-solid fa-right-to-bracket"></i> Đăng Nhập
+            </button>
+            <button type="button" class="auth-tab-btn" id="tab-register-btn" onclick="showAuthTab('register')">
+                <i class="fa-solid fa-user-plus"></i> Đăng Ký
+            </button>
+        </div>
+
+        <div class="auth-body">
+            @if (ViewBag.ErrorMessage != null || TempData["ErrorMessage"] != null)
+            {
+                <div style="background: #fde8e8; color: #9b1c1c; padding: 12px 15px; border-radius: 6px; margin-bottom: 18px; font-size: 14px; font-weight: 600;">
+                    <i class="fa fa-triangle-exclamation"></i> @(ViewBag.ErrorMessage ?? TempData["ErrorMessage"])
+                </div>
+            }
+            @if (ViewBag.RegisterError != null)
+            {
+                <div style="background: #fde8e8; color: #9b1c1c; padding: 12px 15px; border-radius: 6px; margin-bottom: 18px; font-size: 14px; font-weight: 600;">
+                    <i class="fa fa-triangle-exclamation"></i> @ViewBag.RegisterError
+                </div>
+            }
+
+            <!-- FORM ĐĂNG NHẬP -->
+            <form id="login-form" class="auth-form active" asp-controller="Account" asp-action="Login" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+                <h2 style="font-size: 22px; margin-bottom: 20px; color: #1e293b; text-align: center;">Đăng Nhập Tài Khoản</h2>
+                
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="login-username" style="display: block; margin-bottom: 6px; font-weight: 600; color: #334155;">Tên đăng nhập hoặc Email *</label>
+                    <input type="text" id="login-username" name="username" required placeholder="admin hoặc minhduc@gmail.com" value="@(ViewBag.Username ?? "admin")" style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="login-password" style="display: block; margin-bottom: 6px; font-weight: 600; color: #334155;">Mật khẩu *</label>
+                    <input type="password" id="login-password" name="password" required placeholder="Nhập mật khẩu" value="admin123" style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin: 15px 0; font-size: 14px;">
+                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                        <input type="checkbox" checked> Ghi nhớ đăng nhập
+                    </label>
+                    <a href="javascript:void(0)" onclick="alert('Vui lòng liên hệ quản trị viên qua trang Contact để lấy lại mật khẩu.')" style="color: #e94747; text-decoration: none;">Quên mật khẩu?</a>
+                </div>
+
+                <button type="submit" class="auth-btn-submit">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i> Đăng Nhập Ngay
+                </button>
+
+                <div class="demo-accounts">
+                    <strong>Tài khoản mẫu để kiểm thử:</strong><br>
+                    • <strong>Quản trị viên (Admin):</strong> <code>admin</code> / Mật khẩu: <code>admin123</code> (Đăng nhập vào thẳng trang Quản trị CRUD CSDL)<br>
+                    • <strong>Khách hàng:</strong> <code>minhduc@gmail.com</code> / Mật khẩu: <code>123456</code>
+                </div>
+            </form>
+
+            <!-- FORM ĐĂNG KÝ -->
+            <form id="register-form" class="auth-form" asp-controller="Account" asp-action="Register" method="post">
+                @Html.AntiForgeryToken()
+                <h2 style="font-size: 22px; margin-bottom: 20px; color: #1e293b; text-align: center;">Tạo Tài Khoản Mới</h2>
+                
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="reg-name" style="display: block; margin-bottom: 6px; font-weight: 600; color: #334155;">Họ và Tên *</label>
+                    <input type="text" id="reg-name" name="fullName" required placeholder="Ví dụ: Nguyễn Văn A" style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="reg-phone" style="display: block; margin-bottom: 6px; font-weight: 600; color: #334155;">Số Điện Thoại *</label>
+                    <input type="tel" id="reg-phone" name="phone" required placeholder="Ví dụ: 0912345678" style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="reg-email" style="display: block; margin-bottom: 6px; font-weight: 600; color: #334155;">Địa Chỉ Email *</label>
+                    <input type="email" id="reg-email" name="email" required placeholder="name@example.com" style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="reg-pass" style="display: block; margin-bottom: 6px; font-weight: 600; color: #334155;">Mật Khẩu *</label>
+                    <input type="password" id="reg-pass" name="password" required placeholder="Tối thiểu 6 ký tự" style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                </div>
+
+                <button type="submit" class="auth-btn-submit">
+                    <i class="fa-solid fa-user-check"></i> Đăng Ký Tài Khoản
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        function showAuthTab(tab) {
+            var tabLoginBtn = document.getElementById('tab-login-btn');
+            var tabRegBtn = document.getElementById('tab-register-btn');
+            var formLogin = document.getElementById('login-form');
+            var formReg = document.getElementById('register-form');
+
+            if (tab === 'login') {
+                tabLoginBtn.classList.add('active');
+                tabRegBtn.classList.remove('active');
+                formLogin.classList.add('active');
+                formReg.classList.remove('active');
+            } else {
+                tabLoginBtn.classList.remove('active');
+                tabRegBtn.classList.add('active');
+                formLogin.classList.remove('active');
+                formReg.classList.add('active');
+            }
+        }
+
+        // Tự động chuyển tab đăng ký nếu có lỗi đăng ký
+        @if (ViewBag.RegisterError != null)
+        {
+            <text>showAuthTab('register');</text>
+        }
+    </script>
+}

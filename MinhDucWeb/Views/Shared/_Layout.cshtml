@@ -32,7 +32,24 @@
                 <li><a asp-controller="Home" asp-action="Blog">Blog</a></li>
                 <li><a asp-controller="Home" asp-action="About">About</a></li>
                 <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
-                <li><a href="/login.html"><i class="fa-regular fa-user"></i> Đăng Nhập</a></li>
+                @if (!string.IsNullOrEmpty(session?.GetString("AUTH_USER")))
+                {
+                    var authName = session.GetString("AUTH_NAME") ?? session.GetString("AUTH_USER");
+                    <li>
+                        <span style="font-weight: 600; color: #e94747; padding: 0 5px;">
+                            <i class="fa-solid fa-user-circle"></i> @authName
+                        </span>
+                    </li>
+                    <li>
+                        <a asp-controller="Account" asp-action="Logout" title="Đăng xuất" style="color: #64748b;">
+                            <i class="fa-solid fa-right-from-bracket"></i> Thoát
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li><a asp-controller="Account" asp-action="Login"><i class="fa-regular fa-user"></i> Đăng Nhập</a></li>
+                }
                 <li id="lg-bag">
                     <a asp-controller="Cart" asp-action="Index">
                         <i class="fa fa-cart-shopping"></i>
@@ -42,11 +59,22 @@
                         }
                     </a>
                 </li>
-                <li>
-                    <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" style="color: #ffeaa7;">
-                        <i class="fa-solid fa-user-shield"></i> Quản Trị
-                    </a>
-                </li>
+                @if (session?.GetString("AUTH_ROLE") == "Admin")
+                {
+                    <li>
+                        <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" style="color: #ffeaa7; font-weight: 700;">
+                            <i class="fa-solid fa-user-shield"></i> Quản Trị <span style="background: #e94747; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 8px;">Admin</span>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a asp-controller="Account" asp-action="Login" asp-route-returnUrl="/Admin/Dashboard" style="color: #ffeaa7;" title="Đăng nhập tài khoản Quản trị viên để truy cập">
+                            <i class="fa-solid fa-user-shield"></i> Quản Trị
+                        </a>
+                    </li>
+                }
             </ul>
         </div>
     </section>
@@ -86,7 +114,7 @@
 
             <div class="footer-col">
                 <h4>Tài khoản & Đơn hàng</h4>
-                <a href="/login.html">Đăng nhập / Đăng ký</a>
+                <a asp-controller="Account" asp-action="Login">Đăng nhập / Đăng ký</a>
                 <a asp-controller="Cart" asp-action="Index">Xem giỏ hàng</a>
                 <a asp-controller="Cart" asp-action="Checkout">Thanh toán đơn hàng</a>
                 <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Trang Quản trị Admin</a>

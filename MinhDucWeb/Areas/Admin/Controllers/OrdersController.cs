@@ -5,6 +5,7 @@ using MinhDucWeb.Data;
 namespace MinhDucWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [AdminAuthorize]
     public class OrdersController : Controller
     {
         private readonly ShopDbContext _context;

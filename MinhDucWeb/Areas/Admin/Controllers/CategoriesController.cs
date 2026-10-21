@@ -6,6 +6,7 @@ using MinhDucWeb.Models;
 namespace MinhDucWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [AdminAuthorize]
     public class CategoriesController : Controller
     {
         private readonly ShopDbContext _context;

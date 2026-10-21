@@ -50,6 +50,25 @@ namespace MinhDucWeb.Controllers
             return View();
         }
 
+        // Tải xuống file CSDL SQL Script chuẩn
+        [HttpGet("/ShopMinhDucDB.sql")]
+        public IActionResult DownloadSql()
+        {
+            var wwwrootSql = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "ShopMinhDucDB.sql");
+            if (System.IO.File.Exists(wwwrootSql))
+            {
+                return PhysicalFile(Path.GetFullPath(wwwrootSql), "application/sql", "ShopMinhDucDB.sql");
+            }
+
+            var rootSql = Path.Combine(Directory.GetCurrentDirectory(), "..", "ShopMinhDucDB.sql");
+            if (System.IO.File.Exists(rootSql))
+            {
+                return PhysicalFile(Path.GetFullPath(rootSql), "application/sql", "ShopMinhDucDB.sql");
+            }
+
+            return NotFound("Không tìm thấy tệp ShopMinhDucDB.sql.");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

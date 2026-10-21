@@ -61,6 +61,7 @@
                 <li><a asp-area="" asp-controller="Home" asp-action="Index" target="_blank" style="color: #fff;"><i class="fa fa-globe"></i> Xem Website Khách</a></li>
                 <li><a asp-area="" asp-controller="Shop" asp-action="Index" target="_blank" style="color: #fff;"><i class="fa fa-shirt"></i> Xem Shop</a></li>
                 <li><a href="/ShopMinhDucDB.sql" download style="color: #2ecc71; font-weight: 700;"><i class="fa fa-database"></i> Tải SQL Script</a></li>
+                <li><a asp-area="" asp-controller="Account" asp-action="Logout" style="color: #ff6b6b; font-weight: 700;"><i class="fa-solid fa-right-from-bracket"></i> Đăng Xuất</a></li>
             </ul>
         </div>
     </section>
@@ -72,7 +73,7 @@
             <div class="admin-brand">
                 <i class="fa-solid fa-user-shield" style="font-size: 28px; color: #e94747;"></i>
                 <div>
-                    <h3>Minh Đức TH29.25</h3>
+                    <h3>@(Context.Session.GetString("AUTH_NAME") ?? "Chu Minh Đức")</h3>
                     <small style="color: #2ecc71;">● Quản Trị Viên (Online)</small>
                 </div>
             </div>
@@ -81,6 +82,7 @@
                 <li><a asp-area="Admin" asp-controller="Products" asp-action="Index"><i class="fa-solid fa-shirt"></i> Quản Lý Sản Phẩm (CRUD)</a></li>
                 <li><a asp-area="Admin" asp-controller="Orders" asp-action="Index"><i class="fa-solid fa-file-invoice-dollar"></i> Quản Lý Đơn Hàng</a></li>
                 <li><a asp-area="Admin" asp-controller="Categories" asp-action="Index"><i class="fa-solid fa-layer-group"></i> Quản Lý Danh Mục</a></li>
+                <li style="margin-top: 20px; border-top: 1px solid #34495e;"><a asp-area="" asp-controller="Account" asp-action="Logout" style="color: #e74c3c;"><i class="fa-solid fa-right-from-bracket"></i> Đăng Xuất Admin</a></li>
             </ul>
         </aside>
 

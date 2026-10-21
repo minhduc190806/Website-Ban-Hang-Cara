@@ -20,41 +20,49 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+// 3. Cấu hình DbContext kết nối Cơ Sở Dữ Liệu (ÉP DÙNG SQL SERVER 100%)
+string[] possibleServers = new[]
+{
+    "Lenovo-LOQ",
+    "localhost",
+    @"Lenovo-LOQ\SQLEXPRESS",
+    @".\SQLEXPRESS",
+    @"(localdb)\MSSQLLocalDB"
+};
 
-// 3. Cấu hình DbContext kết nối Cơ Sở Dữ Liệu
-var provider = builder.Configuration.GetValue<string>("DatabaseProvider") ?? "SqlServer";
-var sqlServerConn = builder.Configuration.GetConnectionString("SqlServerConnection");
-var sqliteConn = builder.Configuration.GetConnectionString("SqliteConnection");
+string workingSqlServerConn = builder.Configuration.GetConnectionString("SqlServerConnection") 
+    ?? "Server=Lenovo-LOQ;Database=ShopMinhDucDB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True";
 
 bool useSqlServer = false;
-if (provider.Equals("SqlServer", StringComparison.OrdinalIgnoreCase) && !string.IsNullOrEmpty(sqlServerConn))
+string lastError = "";
+
+foreach (var server in possibleServers)
 {
     try
     {
-        var connBuilder = new Microsoft.Data.SqlClient.SqlConnectionStringBuilder(sqlServerConn)
-        {
-            ConnectTimeout = 2 // Thử kết nối nhanh trong 2 giây
-        };
-        using var testConn = new Microsoft.Data.SqlClient.SqlConnection(connBuilder.ConnectionString);
+        var testConnStr = $"Server={server};Database=ShopMinhDucDB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;Connect Timeout=3";
+        using var testConn = new Microsoft.Data.SqlClient.SqlConnection(testConnStr);
         testConn.Open();
+        workingSqlServerConn = $"Server={server};Database=ShopMinhDucDB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True";
         useSqlServer = true;
+        Console.WriteLine($">>> [ĐÃ TÌM THẤY SQL SERVER]: Kết nối thành công vào '{server}' <<<");
+        break;
     }
-    catch
+    catch (Exception ex)
     {
-        useSqlServer = false;
+        lastError = ex.Message;
     }
 }
 
+if (!useSqlServer)
+{
+    Console.WriteLine($">>> [LỖI KẾT NỐI SQL SERVER]: {lastError}");
+}
+
+// Bắt buộc dùng UseSqlServer, KHÔNG dùng UseSqlite nữa
 builder.Services.AddDbContext<ShopDbContext>(options =>
 {
-    if (useSqlServer)
-    {
-        options.UseSqlServer(sqlServerConn);
-    }
-    else
-    {
-        options.UseSqlite(sqliteConn);
-    }
+    options.UseSqlServer(workingSqlServerConn);
 });
 
 var app = builder.Build();
@@ -91,7 +99,16 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
-app.UseStaticFiles();
+// Cho phép tải xuống các file .sql, .doc, .docx từ wwwroot
+var fileTypeProvider = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
+fileTypeProvider.Mappings[".sql"] = "application/sql";
+fileTypeProvider.Mappings[".doc"] = "application/msword";
+fileTypeProvider.Mappings[".docx"] = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    ContentTypeProvider = fileTypeProvider
+});
 
 app.UseRouting();
 
